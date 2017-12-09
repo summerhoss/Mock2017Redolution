@@ -2,6 +2,7 @@
 #define Turn_H
 
 #include "../CommandBase.h"
+#include "WVPIDController.h"
 
 class Turn : public CommandBase {
 public:
@@ -14,6 +15,7 @@ public:
 
 private:
 	double angle;
+	WVPIDController* anglePID;
 };
 
 #endif  // Turn_H

@@ -3,14 +3,14 @@
 DriveUntilTarget::DriveUntilTarget() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
+	Requires(drive);
 }
 
 bool DriveUntilTarget::TargetFound()
 {
-	if(CVStatus.equals("vertical"))
+	if(CVStatus.compare("VERTICAL") == 0)
 	{
 		return true;
-		//.equals is not the right method but I don't know what it is in C ++
 	}
 }
 
@@ -26,7 +26,8 @@ void DriveUntilTarget::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveUntilTarget::IsFinished() {
-	return false;
+
+	return DriveUntilTarget::TargetFound();
 }
 
 // Called once after isFinished returns true

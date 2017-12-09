@@ -11,8 +11,6 @@ Forward::Forward() {
 void Forward::Initialize() {
 	drive->setSpeedLeft(0.5);
 	drive->setSpeedRight(0.5);
-	//what does SetTimeout do?
-	SetTimeout(1);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -22,7 +20,10 @@ void Forward::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Forward::IsFinished() {
-	return IsTimedOut();
+	if(drive->getDistance() == 10)
+		return true;
+	else
+		return false;
 }
 
 // Called once after isFinished returns true

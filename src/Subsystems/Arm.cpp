@@ -1,11 +1,11 @@
-#include "LeadScrew.h"
+#include "Arm.h"
 #include "../RobotMap.h"
 
-LeadScrew::LeadScrew() : Subsystem("ExampleSubsystem") {
+Arm::Arm() : Subsystem("ExampleSubsystem") {
 
 }
 
-void LeadScrew::InitDefaultCommand() {
+void Arm::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }

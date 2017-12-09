@@ -13,6 +13,8 @@ private:
 	CANTalon* left;
 	CANTalon* right;
 	int ticksToDistance;
+	Encoder* encoderLeft;
+	Encoder* encoderRight;
 
 public:
 
@@ -30,7 +32,10 @@ public:
 	double getDistance();
 
 	void setSpeedLeft(double speed);
-	void setSpeedRight(double speed);   //if needed
+	void setSpeedRight(double speed);
+	void resetEncoders();
+	double getRightEncoderDistance();
+	double getLeftEncoderDistance();
 
 	void InitDefaultCommand();
 

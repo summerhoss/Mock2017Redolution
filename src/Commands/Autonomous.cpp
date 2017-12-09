@@ -4,7 +4,6 @@ Autonomous::Autonomous() {
 	// Add Commands here:
 
 	AddSequential(new Forward());
-	//don't know why it's not finding this because I included WPILib
 	AddSequential(new Turn(90));
 	AddSequential(new DriveUntilTarget());
 	AddSequential(new Turn(-90));

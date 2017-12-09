@@ -4,6 +4,7 @@
 using namespace std;
 
 #include "../CommandBase.h"
+#include "Utilities/NetworkTablesInterface.h"
 
 class DriveUntilTarget : public CommandBase {
 public:
@@ -16,7 +17,7 @@ public:
 	void Interrupted();
 
 private:
-	string CVStatus;
+	string CVStatus = NetworkTablesInterface::getOrientation();
 };
 
 #endif  // DriveUntilTarget_H

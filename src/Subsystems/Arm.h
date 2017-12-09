@@ -1,16 +1,16 @@
-#ifndef LeadScrew_H
-#define LeadScrew_H
+#ifndef Arm_H
+#define Arm_H
 
 #include <Commands/Subsystem.h>
 
-class LeadScrew : public Subsystem {
+class Arm : public Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
 public:
-	LeadScrew();
+	Arm();
 	void InitDefaultCommand();
 };
 
-#endif  // LeadScrew_H
+#endif  // Arm_H
