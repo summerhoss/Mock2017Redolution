@@ -17,9 +17,9 @@ void Turn::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void Turn::Execute() {
 	//code from last year that needs to be fixed with the gyro
-	//double current_angle = -drive->getGyroAngle();
-	//double rotateVal = anglePID->Tick(current_angle);
-	//drive->arcadeDrive(0, -DriveTrain::Limit(rotateVal, 0.5));
+	double current_angle = -drive->getGyroAngle();
+	double rotateVal = anglePID->Tick(current_angle);
+	drive->arcadeDrive(0, rotateVal);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -28,6 +28,8 @@ bool Turn::IsFinished() {
 
 		if (finished)
 			std::cout << "Autonomous finished" << std::endl;
+
+		return finished;
 
 		//return finished || forceFinish || IsTimedOut();
 }

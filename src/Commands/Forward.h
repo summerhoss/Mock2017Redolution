@@ -2,6 +2,7 @@
 #define Forward_H
 
 #include "../CommandBase.h"
+#include "WVPIDController.h"
 
 class Forward : public CommandBase {
 public:
@@ -11,6 +12,9 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+private:
+	WVPIDController* distancePID;
 };
 
 #endif  // Forward_H

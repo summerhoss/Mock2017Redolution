@@ -13,8 +13,9 @@ private:
 	CANTalon* left;
 	CANTalon* right;
 	int ticksToDistance;
-	Encoder* encoderLeft;
-	Encoder* encoderRight;
+	Encoder* leftEncoder;
+	Encoder* rightEncoder;
+	Gyro*
 
 public:
 
@@ -38,6 +39,7 @@ public:
 	double getLeftEncoderDistance();
 
 	void InitDefaultCommand();
+	void resetEncoders();
 
 	//void SetReverse();
 	float mult;

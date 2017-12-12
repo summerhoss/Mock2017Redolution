@@ -12,7 +12,7 @@
 #define max(x, y) (((x) > (y)) ? (x) : (y))
 
 DriveTrain::DriveTrain() :
-		Subsystem("DriveTrain"), left(new CANTalon(LEFT_MOTOR_PORT)), right(new CANTalon(RIGHT_MOTOR_PORT)), mult(1.0), ticksToDistance(114), encoderLeft(new Encoder(ENCODER_LEFT_1, ENCODER_LEFT_2)), encoderRight(new Encoder(ENCODER_RIGHT_1, ENCODER_RIGHT_2))  { // 112 < ticksToDistance < 117
+		Subsystem("DriveTrain"), left(new CANTalon(LEFT_MOTOR_PORT)), right(new CANTalon(RIGHT_MOTOR_PORT)), mult(1.0), ticksToDistance(114) { // 112 < ticksToDistance < 117
 
 	//left->SetInverted(true);
 	//right->SetInverted(true);
@@ -21,6 +21,8 @@ DriveTrain::DriveTrain() :
 DriveTrain::~DriveTrain() {
 	delete left;
 	delete right;
+	delete leftEncoder;
+	delete rightEncoder;
 }
 
 void DriveTrain::reverseDrive(){
@@ -101,8 +103,9 @@ float DriveTrain::Limit(float num, float max) {
  //Return distance in feet
 double DriveTrain::getDistance() {
 	//code from last year
-	return ((double) ((encoderLeft->Get()) / ticksToDistance)
-				- (double) ((encoderRight->Get()) / ticksToDistance)) / 2.0;
+	return ((double) ((leftEncoder->GetDistance()) / ticksToDistance)
+				- (double) ((rightEncoder->GetDistance()) / ticksToDistance)) / 2.0;
+	std::cout<<"Distance = "<<getDistance()<<std::endl;
 }
 
 void DriveTrain::InitDefaultCommand() {
@@ -112,12 +115,12 @@ void DriveTrain::InitDefaultCommand() {
 
 double DriveTrain::getRightEncoderDistance()
 {
-	return this->encoderRight->GetDistance();
+	return rightEncoder->GetDistance();
 }
 
 double DriveTrain::getLeftEncoderDistance()
 {
-	return -this->encoderLeft->GetDistance();
+	return leftEncoder->GetDistance();
 }
 
 void DriveTrain::setSpeedLeft(double speed) {
@@ -126,4 +129,10 @@ void DriveTrain::setSpeedLeft(double speed) {
 
 void DriveTrain::setSpeedRight(double speed) {
 	right->Set(speed * mult);
+}
+
+void DriveTrain::resetEncoders()
+{
+	left->Reset();
+	right->Reset();
 }
