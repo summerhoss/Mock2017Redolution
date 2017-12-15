@@ -15,7 +15,7 @@ private:
 	int ticksToDistance;
 	Encoder* leftEncoder;
 	Encoder* rightEncoder;
-	Gyro*
+	ADXRS450_Gyro* gyro;
 
 public:
 
@@ -39,7 +39,7 @@ public:
 	double getLeftEncoderDistance();
 
 	void InitDefaultCommand();
-	void resetEncoders();
+	ADXRS450_Gyro* getGyro();
 
 	//void SetReverse();
 	float mult;

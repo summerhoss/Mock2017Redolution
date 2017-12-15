@@ -5,7 +5,8 @@
 using namespace frc;
 
 OI::OI() : leftStick(new Joystick(2)), rightStick(new Joystick(1))  {
-	//check arguments
+	activateArm = new JoystickButton(rightStick, 2);
+	activateArm->WhenPressed(new MoveArm());
 }
 
 OI::~OI()

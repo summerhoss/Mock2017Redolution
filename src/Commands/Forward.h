@@ -2,16 +2,18 @@
 #define Forward_H
 
 #include "../CommandBase.h"
-#include "WVPIDController.h"
+#include "Utilities/WVPIDController.h"
 
 class Forward : public CommandBase {
 public:
-	Forward();
+	Forward(double myDistance);
+	~Forward();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	double distance;
 
 private:
 	WVPIDController* distancePID;

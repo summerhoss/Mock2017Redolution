@@ -6,9 +6,9 @@
 #include <LiveWindow/LiveWindow.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
-
-#include "CommandBase.h"
 #include "Commands/TankDrive.h"
+#include <WPILib.h>
+#include "CommandBase.h"
 
 class Robot: public frc::IterativeRobot {
 private:
@@ -33,16 +33,8 @@ public:
 
 	void DisabledPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
-
-		//This is copied from last year's code because we don't have the CV values yet
-		frc::SmartDashboard::PutBoolean("CVGearFound",
-					NetworkTablesInterface::gearFound());
-		frc::SmartDashboard::PutNumber("CVGearDistance",
-					NetworkTablesInterface::getGearDistance());
-		frc::SmartDashboard::PutNumber("CVGearAltitude",
-					NetworkTablesInterface::getGearAltitude());
-		frc::SmartDashboard::PutNumber("CVGearAzimuth",
-					NetworkTablesInterface::getGearAzimuth());
+		frc::SmartDashboard::PutString("CVOrientationFound", NetworkTablesInterface::getOrientation());
+		frc::SmartDashboard::PutNumber("CVAzimuthFound", NetworkTablesInterface::getAzimuth());
 	}
 
 	/**
@@ -57,7 +49,11 @@ public:
 	 * to the if-else structure below with additional strings & commands.
 	 */
 	void AutonomousInit() override {
-
+		CommandBase::drive->Enable();
+		CommandBase::drive->SetAbsoluteTolerance(0.05);
+			if (autonomousCommand != nullptr) {
+					autonomousCommand->Start();
+			}
 	}
 
 	void AutonomousPeriodic() override {
@@ -69,6 +65,11 @@ public:
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		if (autonomousCommand != nullptr) {
+					autonomousCommand->Cancel();
+				}
+		CommandBase::drive->Disable();
+		//why is this not working?
 
 	}
 
@@ -76,14 +77,8 @@ public:
 		frc::Scheduler::GetInstance()->Run();
 
 		//This is copied from last year's code because we don't have the CV values yet
-		frc::SmartDashboard::PutBoolean("CVGearFound",
-					NetworkTablesInterface::gearFound());
-		frc::SmartDashboard::PutNumber("CVGearDistance",
-					NetworkTablesInterface::getGearDistance());
-		frc::SmartDashboard::PutNumber("CVGearAltitude",
-					NetworkTablesInterface::getGearAltitude());
-		frc::SmartDashboard::PutNumber("CVGearAzimuth",
-					NetworkTablesInterface::getGearAzimuth());
+		frc::SmartDashboard::PutString("CVOrientationFound", NetworkTablesInterface::getOrientation());
+		frc::SmartDashboard::PutNumber("CVAzimuthFound", NetworkTablesInterface::getAzimuth());
 
 	}
 
@@ -91,16 +86,15 @@ public:
 		frc::LiveWindow::GetInstance()->Run();
 
 		//This is copied from last year's code because we don't have the CV values yet
-		frc::SmartDashboard::PutBoolean("CVGearFound",
-					NetworkTablesInterface::gearFound());
-		frc::SmartDashboard::PutNumber("CVGearDistance",
-					NetworkTablesInterface::getGearDistance());
-		frc::SmartDashboard::PutNumber("CVGearAltitude",
-					NetworkTablesInterface::getGearAltitude());
-		frc::SmartDashboard::PutNumber("CVGearAzimuth",
-					NetworkTablesInterface::getGearAzimuth());
+		frc::SmartDashboard::PutString("CVOrientationFound", NetworkTablesInterface::getOrientation());
+		frc::SmartDashboard::PutNumber("CVAzimuthFound", NetworkTablesInterface::getAzimuth());
 	}
+
+private:
+	CommandGroup* autonomousCommand;
+	frc::SendableChooser<frc::Command*> chooser;
 
 };
 
 START_ROBOT_CLASS(Robot)
+;

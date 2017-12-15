@@ -5,6 +5,8 @@ using namespace std;
 
 #include "../CommandBase.h"
 #include "Utilities/NetworkTablesInterface.h"
+#include "DriveTrain.h"
+#include "WVPIDController.h"
 
 class DriveUntilTarget : public CommandBase {
 public:
@@ -17,7 +19,9 @@ public:
 	void Interrupted();
 
 private:
-	string CVStatus = NetworkTablesInterface::getOrientation();
+	string CVOrientation = NetworkTablesInterface::getOrientation();
+	double CVAzimuth = NetworkTablesInterface::getAzimuth();
+	WVPIDController* distancePID;
 };
 
 #endif  // DriveUntilTarget_H

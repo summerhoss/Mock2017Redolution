@@ -7,8 +7,8 @@
 #include <Commands/Command.h>
 
 #include "OI.h"
+#include "Subsystems/Arm.h"
 //#include "RobotMap.h"
-//#include "Subsystems/DriveTrain.cpp"
 #include "Subsystems/DriveTrain.h"
 
 /**
@@ -25,6 +25,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<OI> oi;
 	static DriveTrain* drive;
+	static Arm* arm;
 	static void initialize();
 };
 

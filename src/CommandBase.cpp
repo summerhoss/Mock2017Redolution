@@ -20,4 +20,5 @@ void CommandBase::initialize()
 {
 	drive = new DriveTrain();
 	oi = std::make_unique<OI>();
+	arm = new Arm();
 }

@@ -1,6 +1,6 @@
 #include "DriveUntilWall.h"
 
-DriveUntilWall::DriveUntilWall() {
+DriveUntilWall::DriveUntilWall() : ultra(new Ultrasonic*) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(drive);

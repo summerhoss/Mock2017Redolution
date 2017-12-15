@@ -11,6 +11,9 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+private:
+	Ultrasonic* ultra;
 };
 
 #endif  // DriveUntilWall_H

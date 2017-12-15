@@ -3,16 +3,11 @@
 Autonomous::Autonomous() {
 	// Add Commands here:
 
-	AddSequential(new Forward());
+	AddSequential(new Forward(10));
 	AddSequential(new Turn(90));
-	AddSequential(new DriveUntilTarget());
+	AddSequential(new Forward(10));
 	AddSequential(new Turn(-90));
-	// I need to fix the turn values
-	AddSequential(new Forward());
 	AddSequential(new Park());
-	AddSequential(new DriveUntilWall());
-	AddSequential(new PushTarget());
-	//autonomous stops after this
 
 
 	// e.g. AddSequential(new Command1());

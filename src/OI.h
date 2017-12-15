@@ -11,6 +11,7 @@ public:
 	Joystick* getDriveStickLeft();
 
 private:
+	Button* activateArm;
 	Joystick* leftStick;
     Joystick* rightStick;
 };

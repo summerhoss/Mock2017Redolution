@@ -12,7 +12,15 @@
 #define max(x, y) (((x) > (y)) ? (x) : (y))
 
 DriveTrain::DriveTrain() :
-		Subsystem("DriveTrain"), left(new CANTalon(LEFT_MOTOR_PORT)), right(new CANTalon(RIGHT_MOTOR_PORT)), mult(1.0), ticksToDistance(114) { // 112 < ticksToDistance < 117
+		Subsystem("DriveTrain"),
+		left(new CANTalon(LEFT_MOTOR_PORT)),
+		right(new CANTalon(RIGHT_MOTOR_PORT)),
+		mult(1.0),
+		ticksToDistance(114),
+		leftEncoder(new Encoder(ENCODER_LEFT_1,ENCODER_LEFT_2)),
+		rightEncoder(new Encoder(ENCODER_RIGHT_1,ENCODER_RIGHT_2)),
+		gyro(new ADXRS450_Gyro())
+{ // 112 < ticksToDistance < 117
 
 	//left->SetInverted(true);
 	//right->SetInverted(true);
@@ -135,4 +143,9 @@ void DriveTrain::resetEncoders()
 {
 	left->Reset();
 	right->Reset();
+}
+
+ADXRS450_Gyro* DriveTrain::getGyro()
+{
+	return gyro;
 }

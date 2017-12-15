@@ -1,23 +1,29 @@
 #include "Turn.h"
 
-Turn::Turn(double inAngle) : angle(inAngle) {
+Turn::Turn(double turnAngle) : anglePID(new WVPIDController(0.15,0,0,90,false)) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(drive);
+	angle = turnAngle;
 	//not sure about the inAngle part... that needs to be fixed
+}
+
+Turn::~Turn()
+{
+	delete anglePID;
 }
 
 // Called just before this Command runs the first time
 void Turn::Initialize() {
 	drive->resetEncoders();
-	//drive->resetGyro();
-	anglePID = new WVPIDController(0.15, 0, 0, angle, false);
+	drive->getGyro()->Reset();
+	anglePID->SetSetPoint(angle);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void Turn::Execute() {
 	//code from last year that needs to be fixed with the gyro
-	double current_angle = -drive->getGyroAngle();
+	double current_angle = drive->getGyro()->GetAngle();
 	double rotateVal = anglePID->Tick(current_angle);
 	drive->arcadeDrive(0, rotateVal);
 }
@@ -25,9 +31,6 @@ void Turn::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool Turn::IsFinished() {
 	bool finished = (fabs(anglePID->GetError()) < 1);
-
-		if (finished)
-			std::cout << "Autonomous finished" << std::endl;
 
 		return finished;
 

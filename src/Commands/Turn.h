@@ -6,15 +6,16 @@
 
 class Turn : public CommandBase {
 public:
-	Turn();
+	Turn(double turnAngle);
+	~Turn();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	double angle;
 
 private:
-	double angle;
 	WVPIDController* anglePID;
 };
 
