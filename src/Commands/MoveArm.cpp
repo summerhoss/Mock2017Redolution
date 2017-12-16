@@ -1,4 +1,5 @@
 #include "MoveArm.h"
+#include "../Subsystems/Arm.h"
 
 MoveArm::MoveArm() {
 	// Use Requires() here to declare subsystem dependencies

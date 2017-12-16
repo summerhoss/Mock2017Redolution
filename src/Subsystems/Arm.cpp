@@ -1,5 +1,6 @@
 #include "Arm.h"
 #include "../RobotMap.h"
+#include "../Commands/MoveArm.h"
 
 Arm::Arm() : Subsystem("Arm"), servo(new Servo(ARM_PORT)) {
 

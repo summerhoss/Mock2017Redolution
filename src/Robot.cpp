@@ -49,8 +49,6 @@ public:
 	 * to the if-else structure below with additional strings & commands.
 	 */
 	void AutonomousInit() override {
-		CommandBase::drive->Enable();
-		CommandBase::drive->SetAbsoluteTolerance(0.05);
 			if (autonomousCommand != nullptr) {
 					autonomousCommand->Start();
 			}

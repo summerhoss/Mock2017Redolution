@@ -2,6 +2,7 @@
 #define OI_H
 
 #include <WPILib.h>
+#include "../Commands/MoveArm.h"
 
 class OI {
 public:

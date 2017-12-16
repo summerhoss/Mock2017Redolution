@@ -23,5 +23,5 @@ std::string NetworkTablesInterface::getOrientation()
 
 double NetworkTablesInterface::getAzimuth()
 {
-	return NetworkTable::GetTable("cv")->GetNumber("azimuth",-1);
+	return NetworkTable::GetTable("cv")->GetNumber("azimuth",-1.0);
 }
